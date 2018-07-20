@@ -4,7 +4,6 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=orleansplayground;AccountKey=$(_orleansplayground.key_)" />
-      <Setting name="DataConnectionString" value="DefaultEndpointsProtocol=https;AccountName=orleansplayground;AccountKey=6f8CbH6w5pD9avZud5Hi68mti5gbUlSj+nuV5Zn5Z4K9z88AghmH3b3XWo/SPl79gVtXRo/yBqkcwu4wbpnsUA==;EndpointSuffix=core.windows.net" />
       <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" value="a2328c3f-2336-4373-8399-7506062ad10c" />
     </ConfigurationSettings>
   </Role>

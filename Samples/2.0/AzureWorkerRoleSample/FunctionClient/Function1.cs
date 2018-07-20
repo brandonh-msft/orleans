@@ -24,9 +24,6 @@ namespace FunctionClient
         {
             if (orleansClient == null)
             {
-                var dataConnectionString = Environment.GetEnvironmentVariable("DataConnectionString");
-                var clusterId = Environment.GetEnvironmentVariable(@"DeploymentId");
-
                 var builder = new ClientBuilder()
                     .Configure<ClusterOptions>(options =>
                     {
@@ -35,7 +32,7 @@ namespace FunctionClient
                     })
                     // Static clustering allows us to point the Function to a *specific* Silo instance.
                     // This needs to be the *public* IP of the Silo cloud service
-                    .UseStaticClustering(new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 44567));
+                    .UseStaticClustering(new IPEndPoint(new IPAddress(new byte[] { 13, 66, 198, 247 }), 44567));
 
                 orleansClient = builder.Build();
 

@@ -53,8 +53,6 @@ namespace Silo
         private Task RunAsync(CancellationToken cancellationToken)
         {
             var siloEndpoint = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["OrleansSiloEndpoint"].IPEndpoint;
-            var connectionString = RoleEnvironment.GetConfigurationSettingValue("DataConnectionString");
-            var deploymentId = RoleEnvironment.DeploymentId;
 
             var builder = new SiloHostBuilder()
                 .Configure<ClusterOptions>(options =>
