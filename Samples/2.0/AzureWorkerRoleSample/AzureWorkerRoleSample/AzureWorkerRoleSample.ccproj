@@ -37,14 +37,6 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OrleansClient\OrleansClient.csproj">
-      <Name>OrleansClient</Name>
-      <Project>{e72ae6c4-a487-4bf4-90af-ff756435c288}</Project>
-      <Private>True</Private>
-      <RoleType>Worker</RoleType>
-      <RoleName>OrleansClient</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
     <ProjectReference Include="..\Silo\Silo.csproj">
       <Name>Silo</Name>
       <Project>{a46eb682-d405-4960-87f1-97d454bb39bd}</Project>

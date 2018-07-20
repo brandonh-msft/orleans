@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using AzureWorker.Interfaces;
@@ -9,7 +10,6 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Orleans;
 using Orleans.Configuration;
-using Orleans.Hosting;
 
 namespace FunctionClient
 {
@@ -30,10 +30,12 @@ namespace FunctionClient
                 var builder = new ClientBuilder()
                     .Configure<ClusterOptions>(options =>
                     {
-                        options.ClusterId = clusterId;
-                        options.ServiceId = "AzureWorkerRoleSample";
+                        options.ClusterId = @"ForFunctions";
+                        options.ServiceId = @"AzureFunctionsSample";
                     })
-                    .UseAzureStorageClustering(config => config.ConnectionString = dataConnectionString);
+                    // Static clustering allows us to point the Function to a *specific* Silo instance.
+                    // This needs to be the *public* IP of the Silo cloud service
+                    .UseStaticClustering(new IPEndPoint(new IPAddress(new byte[] { 127, 0, 0, 1 }), 44567));
 
                 orleansClient = builder.Build();
 
@@ -45,8 +47,6 @@ namespace FunctionClient
                     return true;
                 }).Wait();
             }
-
-            var greetName = req.GetQueryParameterDictionary()[@"greetName"];
 
             var aliceGrain = orleansClient.GetGrain<IGreetGrain>("Alice");
             string greet = await aliceGrain.Greet("greetName");

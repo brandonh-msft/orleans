@@ -20,7 +20,7 @@ namespace Silo
             try
             {
                 this.RunAsync(this.cancellationTokenSource.Token).Wait();
-                
+
                 runCompleteEvent.WaitOne();
             }
             finally
@@ -52,7 +52,6 @@ namespace Silo
 
         private Task RunAsync(CancellationToken cancellationToken)
         {
-            var proxyPort = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["OrleansProxyEndpoint"].IPEndpoint.Port;
             var siloEndpoint = RoleEnvironment.CurrentRoleInstance.InstanceEndpoints["OrleansSiloEndpoint"].IPEndpoint;
             var connectionString = RoleEnvironment.GetConfigurationSettingValue("DataConnectionString");
             var deploymentId = RoleEnvironment.DeploymentId;
@@ -60,11 +59,13 @@ namespace Silo
             var builder = new SiloHostBuilder()
                 .Configure<ClusterOptions>(options =>
                 {
-                    options.ClusterId = deploymentId;
-                    options.ServiceId = "AzureWorkerRoleSample";
+                    options.ClusterId = @"ForFunctions";
+                    options.ServiceId = @"AzureFunctionsSample";
                 })
-                .ConfigureEndpoints(siloEndpoint.Address, siloEndpoint.Port, proxyPort)
-                .UseAzureStorageClustering(options => options.ConnectionString = connectionString);
+                .ConfigureEndpoints(siloEndpoint.Address, siloEndpoint.Port, 44567)
+                // We use Development Clustering so we can specify a Static Endpoint for the Silo.
+                // This needs to be the *public* IP address of the cloud service hosting it.
+                .UseDevelopmentClustering(siloEndpoint);
 
             siloHost = builder.Build();
 
