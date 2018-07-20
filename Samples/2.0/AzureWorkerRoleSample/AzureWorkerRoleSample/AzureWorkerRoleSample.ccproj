@@ -45,25 +45,13 @@
       <RoleName>Silo</RoleName>
       <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
     </ProjectReference>
-    <ProjectReference Include="..\WebOrleansClient\WebOrleansClient.csproj">
-      <Name>WebOrleansClient</Name>
-      <Project>{37087530-a905-494e-88d6-f4f798cd3c1f}</Project>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <RoleName>WebOrleansClient</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="OrleansClientContent\" />
     <Folder Include="Profiles" />
     <Folder Include="SiloContent\" />
-    <Folder Include="WebOrleansClientContent\" />
   </ItemGroup>
   <ItemGroup>
-    <DiagnosticsConfiguration Include="OrleansClientContent\diagnostics.wadcfgx" />
     <DiagnosticsConfiguration Include="SiloContent\diagnostics.wadcfgx" />
-    <DiagnosticsConfiguration Include="WebOrleansClientContent\diagnostics.wadcfgx" />
   </ItemGroup>
   <ItemGroup>
     <PublishProfile Include="Profiles\OrleansPlaygroundProduction.azurePubxml" />
